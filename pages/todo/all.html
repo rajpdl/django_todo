@@ -2,7 +2,7 @@
 
 {% block content %}
     <div style="display: flex; justify-content:space-around;">
-        <div class="list">
+        <div >
             <h2>Create Todo</h2>
             <form method="GET" action="/todo/create">
                 <div>
@@ -15,7 +15,7 @@
                 </div>
             </form>
         </div>
-        <div class="list">
+        <div >
             <h2>Showing All Todo</h2>
             {% for x in todos %}
                 <p>Id : {{x.id}}</p>
