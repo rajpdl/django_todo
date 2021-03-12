@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="display: flex; justify-content:space-around;">
+        <div class="list">
+            <h2>Create Todo</h2>
+            <form method="GET" action="/todo/create">
+                <div>
+                    <label>Name:</label>
+                    <input type="text" name="name" />
+                </div>
+                <div>
+                    <br />
+                    <input type="submit" value="Create"/>
+                </div>
+            </form>
+        </div>
+        <div class="list">
+            <h2>Showing All Todo</h2>
+            {% for x in todos %}
+                <p>Id : {{x.id}}</p>
+                <p>Name : {{x.name}} 
+                    <span 
+                    style="font-weight: bold; background: skyblue; padding: 5px;"
+                    onclick="handleDelete('{{x.id}}')"
+                    >X</span>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+        <script>
+            async function handleDelete(id) {
+                const post = await fetch(`http://localhost:8000/todo/delete/${id}`);
+                if(post.status === 200) {
+                    alert(id + ' has been deleted.');
+                    window.location.href="/todo/all";
+                }
+            }
+        </script>
+{% endblock %}
